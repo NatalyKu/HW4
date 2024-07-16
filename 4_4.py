@@ -26,6 +26,14 @@ def show_phone(args, contacts):
 def show_all(contacts):
     return contacts
 
+def input_error(func):
+    def inner(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except ValueError:
+            return "Give me name and phone please."
+
+    return inner
 
 def main():
     contacts = {}
@@ -47,7 +55,6 @@ def main():
             print(show_phone(args, contacts))
         elif command == "all":
             print(show_all(contacts))
-        
         else:
             print("Invalid command.")
     

@@ -6,13 +6,14 @@ def total_salary(path):
     num_empl = 0
     try:    
         with open (path, 'r') as salary:
-             for line in salary:
-                list_salary = [line.split(',')]
-                for el in list_salary:
-                    print(el, type(el), salary)
+            try:
+                for line in salary:
+                    list_salary = line.split(',')[1]
                     num_empl = num_empl + 1
-                    total += int(el[1])
-                avg_salary = (total/num_empl)
+                    total += int(line.split(',')[1])
+                    avg_salary = (total/num_empl)
+            except ZeroDivisionError:
+                return "There are no salary data in the file"
     except FileNotFoundError:
         (print (f'Check your path {path}'))
     return(total, avg_salary)
